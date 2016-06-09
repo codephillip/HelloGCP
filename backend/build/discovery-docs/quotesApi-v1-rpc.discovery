@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"zRMgE0l9nVDW4S28VYYcYQF9UW4/pYgQU0lW-ON1_JSW8oy_47XgiVE\"",
+ "etag": "\"zRMgE0l9nVDW4S28VYYcYQF9UW4/c-3tt0_xwEBhbtE_meYcgN8bZN8\"",
  "discoveryVersion": "v1",
  "id": "quotesApi:v1",
  "name": "quotesApi",
@@ -71,8 +71,23 @@
   }
  },
  "schemas": {
-  "Quotes": {
-   "id": "Quotes",
+  "CollectionResponse_Quote": {
+   "id": "CollectionResponse_Quote",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Quote"
+     }
+    },
+    "nextPageToken": {
+     "type": "string"
+    }
+   }
+  },
+  "Quote": {
+   "id": "Quote",
    "type": "object",
    "properties": {
     "id": {
@@ -89,9 +104,44 @@
   }
  },
  "methods": {
-  "quotesApi.getQuotes": {
-   "id": "quotesApi.getQuotes",
+  "quotesApi.insertQuote": {
+   "id": "quotesApi.insertQuote",
+   "parameters": {
+    "resource": {
+     "$ref": "Quote"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Quote"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "quotesApi.listQuote": {
+   "id": "quotesApi.listQuote",
    "allowGet": true,
+   "parameters": {
+    "count": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "cursor": {
+     "type": "string"
+    }
+   },
+   "returns": {
+    "$ref": "CollectionResponse_Quote"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "quotesApi.removeQuote": {
+   "id": "quotesApi.removeQuote",
    "parameters": {
     "id": {
      "type": "string",
@@ -102,25 +152,22 @@
    "parameterOrder": [
     "id"
    ],
-   "returns": {
-    "$ref": "Quotes"
-   },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
-  "quotesApi.insertQuotes": {
-   "id": "quotesApi.insertQuotes",
+  "quotesApi.updateQuote": {
+   "id": "quotesApi.updateQuote",
    "parameters": {
     "resource": {
-     "$ref": "Quotes"
+     "$ref": "Quote"
     }
    },
    "parameterOrder": [
     "resource"
    ],
    "returns": {
-    "$ref": "Quotes"
+    "$ref": "Quote"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"

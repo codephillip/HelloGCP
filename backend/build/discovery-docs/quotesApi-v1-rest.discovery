@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"zRMgE0l9nVDW4S28VYYcYQF9UW4/pYgQU0lW-ON1_JSW8oy_47XgiVE\"",
+ "etag": "\"zRMgE0l9nVDW4S28VYYcYQF9UW4/c-3tt0_xwEBhbtE_meYcgN8bZN8\"",
  "discoveryVersion": "v1",
  "id": "quotesApi:v1",
  "name": "quotesApi",
@@ -73,8 +73,23 @@
   }
  },
  "schemas": {
-  "Quotes": {
-   "id": "Quotes",
+  "CollectionResponse_Quote": {
+   "id": "CollectionResponse_Quote",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Quote"
+     }
+    },
+    "nextPageToken": {
+     "type": "string"
+    }
+   }
+  },
+  "Quote": {
+   "id": "Quote",
    "type": "object",
    "properties": {
     "id": {
@@ -91,10 +106,47 @@
   }
  },
  "methods": {
-  "getQuotes": {
-   "id": "quotesApi.getQuotes",
-   "path": "quotes/{id}",
+  "insertQuote": {
+   "id": "quotesApi.insertQuote",
+   "path": "quotes",
+   "httpMethod": "POST",
+   "request": {
+    "$ref": "Quote",
+    "parameterName": "resource"
+   },
+   "response": {
+    "$ref": "Quote"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "listQuote": {
+   "id": "quotesApi.listQuote",
+   "path": "quotes",
    "httpMethod": "GET",
+   "parameters": {
+    "count": {
+     "type": "integer",
+     "format": "int32",
+     "location": "query"
+    },
+    "cursor": {
+     "type": "string",
+     "location": "query"
+    }
+   },
+   "response": {
+    "$ref": "CollectionResponse_Quote"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "removeQuote": {
+   "id": "quotesApi.removeQuote",
+   "path": "quotes/{id}",
+   "httpMethod": "DELETE",
    "parameters": {
     "id": {
      "type": "string",
@@ -106,23 +158,20 @@
    "parameterOrder": [
     "id"
    ],
-   "response": {
-    "$ref": "Quotes"
-   },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
-  "insertQuotes": {
-   "id": "quotesApi.insertQuotes",
+  "updateQuote": {
+   "id": "quotesApi.updateQuote",
    "path": "quotes",
-   "httpMethod": "POST",
+   "httpMethod": "PUT",
    "request": {
-    "$ref": "Quotes",
+    "$ref": "Quote",
     "parameterName": "resource"
    },
    "response": {
-    "$ref": "Quotes"
+    "$ref": "Quote"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
