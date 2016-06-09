@@ -6,7 +6,7 @@
         <init-param>
             <param-name>services</param-name>
             <param-value>com.example.codephillip.myapplication.backend.MyEndpoint,
-                com.example.codephillip.myapplication.backend.MyBeanEndpoint</param-value>
+                com.example.codephillip.myapplication.backend.QuotesEndpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
